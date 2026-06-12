@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ===================================================================
+     EDIT THIS: page title (shows in the browser tab and on Google)
+     =================================================================== -->
+<title>Adesh Dhage ̰— Robotics & ML Engineer</title>
+<meta name="description" content="Portfolio of a robotics and machine learning engineer — autonomous navigation, perception, control, and learned manipulation." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:      #0E1116;
+    --ink-2:    #141A22;
+    --ink-3:    #1B222C;
+    --paper:    #ECEAE3;
+    --muted:    #8B95A1;
+    --faint:    #5A636E;
+    --border:   #232B35;
+    --amber:    #E8A33D;
+    --amber-hi: #F4B655;
+    --amber-dim:rgba(232,163,61,0.12);
+    --signal:   #5BD68A;
+
+    --display: 'Space Grotesk', sans-serif;
+    --body:    'IBM Plex Sans', sans-serif;
+    --mono:    'Space Mono', monospace;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    /* faint blueprint grid */
+    background-image:
+      linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 56px 56px;
+    overflow-x:hidden;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  ::selection{ background:var(--amber); color:var(--ink); }
+
+  /* ---- shared layout ---- */
+  .wrap{ width:min(1120px, 92vw); margin-inline:auto; }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:inline-flex;
+    align-items:center;
+    gap:.6rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:1px;
+    background:var(--amber);
+    display:inline-block;
+  }
+
+  .section{ padding-block:clamp(4rem, 9vw, 7rem); }
+  .section-head{ margin-bottom:3rem; }
+  .section-head h2{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.8rem, 4vw, 2.7rem);
+    letter-spacing:-0.02em;
+    margin-top:.9rem;
+    line-height:1.05;
+  }
+
+  /* =================  HEADER  ================= */
+  header{
+    position:fixed; inset:0 0 auto 0;
+    z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(14,17,22,0.72);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    height:62px;
+  }
+  .brand{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:.92rem;
+    letter-spacing:.04em;
+    display:flex; align-items:center; gap:.55rem;
+  }
+  .brand .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--signal);
+    box-shadow:0 0 0 0 rgba(91,214,138,.5);
+    animation:pulse 2.4s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(91,214,138,.45); }
+    70%{ box-shadow:0 0 0 7px rgba(91,214,138,0); }
+    100%{ box-shadow:0 0 0 0 rgba(91,214,138,0); }
+  }
+  .nav-links{ display:flex; gap:2rem; font-family:var(--mono); font-size:.8rem; letter-spacing:.08em; }
+  .nav-links a{ color:var(--muted); transition:color .2s; }
+  .nav-links a:hover{ color:var(--paper); }
+  .nav-toggle{ display:none; background:none; border:0; color:var(--paper); font-family:var(--mono); cursor:pointer; font-size:.85rem; }
+
+  /* =================  HERO  ================= */
+  .hero{
+    min-height:100svh;
+    display:flex; align-items:center;
+    position:relative;
+    padding-top:62px;
+  }
+  /* targeting-bracket frame — the page signature */
+  .scope{ position:relative; padding:clamp(1.5rem,4vw,3rem) clamp(1rem,3vw,2.5rem); }
+  .scope::before, .scope::after,
+  .scope .br-bl, .scope .br-br{
+    content:""; position:absolute; width:34px; height:34px;
+    border:2px solid var(--amber); opacity:.85;
+  }
+  .scope::before{ top:0; left:0; border-right:0; border-bottom:0; }
+  .scope::after{ top:0; right:0; border-left:0; border-bottom:0; }
+  .scope .br-bl{ bottom:0; left:0; border-right:0; border-top:0; }
+  .scope .br-br{ bottom:0; right:0; border-left:0; border-top:0; }
+
+  .scan{
+    position:absolute; left:0; right:0; top:0; height:2px;
+    background:linear-gradient(90deg, transparent, var(--amber), transparent);
+    opacity:.55;
+    animation:scan 5.5s ease-in-out infinite;
+  }
+  @keyframes scan{
+    0%,100%{ transform:translateY(6px); opacity:0; }
+    8%{ opacity:.55; }
+    92%{ opacity:.55; }
+    50%{ transform:translateY(calc(100% - 8px)); opacity:.55; }
+  }
+
+  .hero .role{
+    font-family:var(--mono);
+    font-size:.78rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .hero h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(2.6rem, 8.5vw, 6.2rem);
+    line-height:.95;
+    letter-spacing:-0.03em;
+    margin:1rem 0 1.4rem;
+  }
+  .hero h1 .accent{ color:var(--amber); }
+  .hero p.lead{
+    max-width:42ch;
+    color:var(--muted);
+    font-size:clamp(1rem,2vw,1.15rem);
+  }
+  .telemetry{
+    margin-top:2.2rem;
+    font-family:var(--mono);
+    font-size:.74rem; letter-spacing:.08em;
+    color:var(--faint);
+    display:flex; flex-wrap:wrap; gap:.6rem 1.4rem;
+    border-top:1px solid var(--border);
+    padding-top:1.2rem;
+  }
+  .telemetry b{ color:var(--paper); font-weight:400; }
+  .telemetry .live{ color:var(--signal); }
+
+  .hero-cta{ margin-top:2.2rem; display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono); font-size:.82rem; letter-spacing:.06em;
+    padding:.8rem 1.4rem; border:1px solid var(--amber);
+    color:var(--amber); transition:all .2s; cursor:pointer;
+    display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn:hover{ background:var(--amber); color:var(--ink); }
+  .btn.ghost{ border-color:var(--border); color:var(--muted); }
+  .btn.ghost:hover{ border-color:var(--paper); color:var(--paper); background:transparent; }
+
+  /* =================  WORK  ================= */
+  .project{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:clamp(1.5rem,4vw,3.5rem);
+    align-items:center;
+    padding-block:clamp(2.5rem,5vw,4rem);
+    border-top:1px solid var(--border);
+  }
+  .project:nth-child(even) .p-media{ order:2; }
+
+  /* media frame — holds an image OR an embedded video */
+  .p-media{ position:relative; }
+  .media-frame{
+    position:relative;
+    aspect-ratio:16/10;
+    background:var(--ink-2);
+    border:1px solid var(--border);
+    overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .media-frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+  /* responsive video embeds (YouTube / Vimeo) */
+  .media-frame.video{ aspect-ratio:16/9; }
+  .media-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  /* placeholder look when no media is added yet */
+  .placeholder{
+    font-family:var(--mono); color:var(--faint);
+    font-size:.78rem; letter-spacing:.1em; text-align:center;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:22px 22px;
+  }
+  .media-tag{
+    position:absolute; top:10px; left:10px;
+    font-family:var(--mono); font-size:.64rem; letter-spacing:.14em;
+    color:var(--amber); background:rgba(14,17,22,.78);
+    padding:.25rem .55rem; border:1px solid var(--border);
+  }
+
+  .p-index{ font-family:var(--mono); color:var(--amber); font-size:.8rem; letter-spacing:.1em; }
+  .project h3{
+    font-family:var(--display); font-weight:500;
+    font-size:clamp(1.4rem,3vw,2rem); letter-spacing:-0.02em;
+    margin:.5rem 0 1rem; line-height:1.1;
+  }
+  .project p{ color:var(--muted); margin-bottom:1.3rem; }
+  .stack{ display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.4rem; }
+  .stack span{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.04em;
+    color:var(--paper); background:var(--ink-3);
+    padding:.32rem .65rem; border:1px solid var(--border);
+  }
+  .p-links{ display:flex; gap:1.4rem; font-family:var(--mono); font-size:.8rem; }
+  .p-links a{ color:var(--amber); border-bottom:1px solid transparent; transition:border-color .2s; }
+  .p-links a:hover{ border-color:var(--amber); }
+  .p-links a::after{ content:" ↗"; color:var(--faint); }
+
+  /* =================  CAPABILITIES  ================= */
+  .caps{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.2rem; }
+  .cap{
+    border:1px solid var(--border); background:var(--ink-2);
+    padding:1.6rem 1.4rem;
+    transition:border-color .25s, transform .25s;
+  }
+  .cap:hover{ border-color:var(--amber); transform:translateY(-3px); }
+  .cap h4{
+    font-family:var(--mono); font-size:.78rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--amber); margin-bottom:1rem;
+  }
+  .cap ul{ list-style:none; display:flex; flex-direction:column; gap:.5rem; }
+  .cap li{ color:var(--muted); font-size:.92rem; display:flex; gap:.6rem; }
+  .cap li::before{ content:"›"; color:var(--faint); }
+
+  /* =================  ABOUT  ================= */
+  .about{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
+  .about-photo{
+    aspect-ratio:4/5; background:var(--ink-2);
+    border:1px solid var(--border); overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about-photo img{ width:100%; height:100%; object-fit:cover; }
+  .about-body p{ color:var(--muted); margin-bottom:1.1rem; max-width:54ch; }
+  .about-body p strong{ color:var(--paper); font-weight:500; }
+
+  /* =================  CONTACT / FOOTER  ================= */
+  .contact{ text-align:center; }
+  .contact h2{
+    font-family:var(--display); font-weight:500;
+    font-size:clamp(2rem,6vw,3.6rem); letter-spacing:-0.02em; line-height:1.05;
+    margin:1rem 0 1.8rem;
+  }
+  .contact .email{ color:var(--amber); border-bottom:1px solid var(--amber); padding-bottom:2px; }
+  .socials{ display:flex; gap:1.6rem; justify-content:center; margin-top:2rem; font-family:var(--mono); font-size:.85rem; }
+  .socials a{ color:var(--muted); transition:color .2s; }
+  .socials a:hover{ color:var(--paper); }
+
+  footer{ border-top:1px solid var(--border); padding-block:1.6rem; }
+  .foot{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:.6rem;
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.08em; color:var(--faint);
+  }
+
+  /* =================  reveal animation  ================= */
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* =================  responsive  ================= */
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; inset:62px 0 auto 0;
+      flex-direction:column; gap:0;
+      background:var(--ink-2); border-bottom:1px solid var(--border);
+      transform:translateY(-120%); transition:transform .3s; padding:1rem 4vw;
+    }
+    .nav-links.open{ transform:none; }
+    .nav-links a{ padding:.9rem 0; border-bottom:1px solid var(--border); }
+    .nav-toggle{ display:block; }
+    .project{ grid-template-columns:1fr; }
+    .project:nth-child(even) .p-media{ order:0; }
+    .about{ grid-template-columns:1fr; }
+    .about-photo{ max-width:280px; }
+  }
+
+  :focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation:none !important; scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===========================  HEADER  =========================== -->
+<header>
+  <div class="wrap nav">
+    <!-- EDIT: your initials or short name -->
+    <a href="#top" class="brand"><span class="dot"></span>Y.N.</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#work">work</a>
+      <a href="#capabilities">capabilities</a>
+      <a href="#about">about</a>
+      <a href="#contact">contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">[ menu ]</button>
+  </div>
+</header>
+
+<!-- ===========================  HERO  =========================== -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="scope reveal">
+      <span class="br-bl"></span><span class="br-br"></span>
+      <span class="scan"></span>
+
+      <p class="role">Robotics &amp; Machine Learning Engineer</p>
+      <!-- EDIT: your name -->
+      <h1>Your<br><span class="accent">Name.</span></h1>
+      <!-- EDIT: one-line summary of what you build -->
+      <p class="lead">I build autonomous systems — from perception and SLAM to learned control — and ship them onto real robots that move through the real world.</p>
+
+      <div class="telemetry">
+        <span>SYS <b class="live">● ONLINE</b></span>
+        <span>ROLE <b>PERCEPTION · PLANNING · CONTROL</b></span>
+        <span>LOC <b>18.5204°N&nbsp;73.8567°E</b></span>
+        <span>STATUS <b>OPEN TO WORK</b></span>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#work" class="btn">View work →</a>
+        <!-- EDIT: link your resume PDF (upload resume.pdf to the repo) -->
+        <a href="resume.pdf" class="btn ghost">Download résumé</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================  WORK  ===========================
+     Each project is one <article class="project"> block.
+     • For a PHOTO  → keep the <img> version of .media-frame
+     • For a VIDEO  → use the .media-frame.video version with a YouTube/Vimeo embed
+     Copy/paste a block to add more projects. Replace text, images, and links.
+============================================================= -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Selected work · index 01–04</span>
+      <h2>Things I have built and shipped.</h2>
+    </div>
+
+    <!-- ---------- PROJECT 01 (VIDEO example) ---------- -->
+    <article class="project reveal">
+      <div class="p-media">
+        <span class="media-tag">▶ DEMO</span>
+        <!-- VIDEO EMBED: replace the YouTube ID (VIDEO_ID) with your own.
+             From a YouTube link like youtube.com/watch?v=ABC123 the ID is ABC123 -->
+        <div class="media-frame video">
+          <iframe src="https://youtu.be/Q_ywmVsJJEY?si=MEtylESEKenOWzpl"
+                  title="Project demo video" loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="p-body">
+        <span class="p-index">// 01</span>
+        <h3>Autonomous Indoor Navigation Stack</h3>
+        <p>A full perception-to-control pipeline for a differential-drive robot: real-time SLAM with LiDAR–IMU–odometry fusion, costmap path planning, and recovery behaviors. Cut localization drift by 38% over 200 m runs.</p>
+        <div class="stack">
+          <span>ROS 2</span><span>C++</span><span>Nav2</span><span>EKF</span><span>LiDAR</span><span>Python</span>
+        </div>
+        <div class="p-links">
+          <a href="#">GitHub</a>
+          <a href="#">Write-up</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---------- PROJECT 02 (PHOTO example) ---------- -->
+    <article class="project reveal">
+      <div class="p-media">
+        <span class="media-tag">◳ IMG</span>
+        <!-- PHOTO: replace src with your image path, e.g. images/grasping.jpg
+             (create an "images" folder in your repo and upload photos there) -->
+        <div class="media-frame">
+          <!-- <img src="images/grasping.jpg" alt="Robotic grasping rig" /> -->
+          <span class="placeholder">[ DROP IMAGE → images/grasping.jpg ]</span>
+        </div>
+      </div>
+      <div class="p-body">
+        <span class="p-index">// 02</span>
+        <h3>Vision-Based Robotic Grasping</h3>
+        <p>Trained a 6-DOF arm to grasp novel objects using a learned grasp-quality network and domain-randomized sim-to-real transfer. 91% success on previously unseen objects with no fine-tuning.</p>
+        <div class="stack">
+          <span>PyTorch</span><span>Reinforcement Learning</span><span>Isaac Sim</span><span>MoveIt</span><span>OpenCV</span>
+        </div>
+        <div class="p-links">
+          <a href="#">GitHub</a>
+          <a href="#">Paper</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---------- PROJECT 03 (PHOTO example) ---------- -->
+    <article class="project reveal">
+      <div class="p-media">
+        <span class="media-tag">◳ IMG</span>
+        <div class="media-frame">
+          <!-- <img src="images/edge-detection.jpg" alt="Edge detection on Jetson" /> -->
+          <span class="placeholder">[ DROP IMAGE → images/edge.jpg ]</span>
+        </div>
+      </div>
+      <div class="p-body">
+        <span class="p-index">// 03</span>
+        <h3>Real-Time Detection on Edge Hardware</h3>
+        <p>Optimized an object-detection model for an NVIDIA Jetson: INT8 quantization and TensorRT graph fusion to hit 60 FPS under 10 W. Deployed as the obstacle-avoidance front-end on a mobile platform.</p>
+        <div class="stack">
+          <span>TensorRT</span><span>YOLO</span><span>CUDA</span><span>Jetson</span><span>C++</span>
+        </div>
+        <div class="p-links">
+          <a href="#">GitHub</a>
+          <a href="#">Benchmarks</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---------- PROJECT 04 (VIDEO example) ---------- -->
+    <article class="project reveal">
+      <div class="p-media">
+        <span class="media-tag">▶ DEMO</span>
+        <div class="media-frame video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+                  title="Quadruped gait demo" loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="p-body">
+        <span class="p-index">// 04</span>
+        <h3>Learned Quadruped Gait Controller</h3>
+        <p>A locomotion policy trained with PPO in simulation, robust across uneven terrain, paired with a model-predictive fallback for recovery. Stays upright through pushes and unmodeled slopes.</p>
+        <div class="stack">
+          <span>MuJoCo</span><span>PPO</span><span>MPC</span><span>Python</span><span>Sim-to-Real</span>
+        </div>
+        <div class="p-links">
+          <a href="#">GitHub</a>
+          <a href="#">Demo</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===========================  CAPABILITIES  =========================== -->
+<section class="section" id="capabilities">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Capabilities</span>
+      <h2>The stack I work across.</h2>
+    </div>
+    <div class="caps">
+      <div class="cap reveal">
+        <h4>Robotics</h4>
+        <ul>
+          <li>ROS / ROS 2</li><li>SLAM &amp; State Estimation</li>
+          <li>Motion Planning</li><li>Control — PID / LQR / MPC</li>
+          <li>Sensor Fusion</li>
+        </ul>
+      </div>
+      <div class="cap reveal">
+        <h4>Machine Learning</h4>
+        <ul>
+          <li>PyTorch · TensorFlow</li><li>Reinforcement Learning</li>
+          <li>Computer Vision</li><li>Sim-to-Real Transfer</li>
+          <li>Model Optimization</li>
+        </ul>
+      </div>
+      <div class="cap reveal">
+        <h4>Systems</h4>
+        <ul>
+          <li>C++ · Python</li><li>CUDA</li>
+          <li>Embedded — Jetson / STM32</li><li>Linux · Docker</li>
+          <li>Real-Time Pipelines</li>
+        </ul>
+      </div>
+      <div class="cap reveal">
+        <h4>Tooling</h4>
+        <ul>
+          <li>Isaac Sim · Gazebo</li><li>MuJoCo</li>
+          <li>MoveIt · Nav2</li><li>OpenCV</li>
+          <li>Git · CI/CD</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================  ABOUT  =========================== -->
+<section class="section" id="about">
+  <div class="wrap about">
+    <div class="about-photo reveal">
+      <!-- PHOTO: replace src with your headshot, e.g. images/me.jpg -->
+      <!-- <img src="images/me.jpg" alt="Portrait" /> -->
+      <span class="placeholder">[ DROP PHOTO → images/me.jpg ]</span>
+    </div>
+    <div class="about-body reveal">
+      <span class="eyebrow">About</span>
+      <h2 style="font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,3.5vw,2.4rem);letter-spacing:-0.02em;margin:.9rem 0 1.4rem;line-height:1.1;">
+        I like robots that work outside the lab.
+      </h2>
+      <!-- EDIT: your real story -->
+      <p>I'm a robotics and ML engineer focused on the messy gap between a model that works in simulation and a robot that works on a Tuesday afternoon. My work spans <strong>perception, planning, and control</strong>, with a soft spot for getting learned policies to survive contact with reality.</p>
+      <p>Recently I've been working on <strong>autonomous navigation</strong> and <strong>learned manipulation</strong>. Before that, embedded vision on edge hardware. I care about clean interfaces, reproducible experiments, and systems that fail gracefully.</p>
+      <p>Outside of work you'll find me tinkering with hardware, reading control theory I half understand, and over-documenting side projects.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================  CONTACT  =========================== -->
+<section class="section contact" id="contact">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="justify-content:center;">Contact</span>
+    <h2>Let's build something<br>that moves.</h2>
+    <!-- EDIT: your email -->
+    <a class="email" href="mailto:adeshdhage5@gmail.com">adeshdhage5@gmail.com</a>
+    <div class="socials">
+      <!-- EDIT: your links -->
+      <a href="#">GitHub ↗</a>
+      <a href="#">LinkedIn ↗</a>
+      <a href="#">Google Scholar ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 YOUR NAME</span>
+    <span>BUILT WITH HTML · HOSTED ON GITHUB PAGES</span>
+    <span>18.5204°N 73.8567°E</span>
+  </div>
+</footer>
+
+<script>
+  // mobile menu
+  const toggle = document.getElementById('navToggle');
+  const links  = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.textContent = open ? '[ close ]' : '[ menu ]';
+  });
+  links.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.textContent = '[ menu ]';
+    })
+  );
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
