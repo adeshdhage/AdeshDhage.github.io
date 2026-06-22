@@ -7,7 +7,7 @@
 <!-- ===================================================================
      EDIT THIS: page title (shows in the browser tab and on Google)
      =================================================================== -->
-<title>Adesh Dhage ̰— Robotics & ML Engineer</title>
+<title>Adesh Dhage — Robotics &amp; ML Engineer</title>
 <meta name="description" content="Portfolio of a robotics and machine learning engineer — autonomous navigation, perception, control, and learned manipulation." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -224,13 +224,14 @@
   .placeholder{
     font-family:var(--mono); color:var(--faint);
     font-size:.78rem; letter-spacing:.1em; text-align:center;
+    padding:1rem;
     background-image:
       linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
     background-size:22px 22px;
   }
   .media-tag{
-    position:absolute; top:10px; left:10px;
+    position:absolute; top:10px; left:10px; z-index:2;
     font-family:var(--mono); font-size:.64rem; letter-spacing:.14em;
     color:var(--amber); background:rgba(14,17,22,.78);
     padding:.25rem .55rem; border:1px solid var(--border);
@@ -334,7 +335,7 @@
 <header>
   <div class="wrap nav">
     <!-- EDIT: your initials or short name -->
-    <a href="#top" class="brand"><span class="dot"></span>Y.N.</a>
+    <a href="#top" class="brand"><span class="dot"></span>A.D.</a>
     <nav class="nav-links" id="navLinks">
       <a href="#work">work</a>
       <a href="#capabilities">capabilities</a>
@@ -375,38 +376,61 @@
 </section>
 
 <!-- ===========================  WORK  ===========================
-     Each project is one <article class="project"> block.
-     • For a PHOTO  → keep the <img> version of .media-frame
-     • For a VIDEO  → use the .media-frame.video version with a YouTube/Vimeo embed
-     Copy/paste a block to add more projects. Replace text, images, and links.
+
+     ┌─────────────────────────────────────────────────────────────┐
+     │  HOW THE IMAGES WORK (the easy part):                        │
+     │                                                              │
+     │  1. Make a folder called  images  in the same place as       │
+     │     this file.                                               │
+     │  2. Put your 5 photos in it, named exactly:                  │
+     │        project-01.jpg                                         │
+     │        project-02.jpg                                         │
+     │        project-03.jpg                                         │
+     │        project-04.jpg                                         │
+     │        project-05.jpg                                         │
+     │                                                              │
+     │  That's it — each photo appears automatically. Until a file  │
+     │  exists, that slot shows a grey "ADD IMAGE" placeholder, so   │
+     │  nothing looks broken while you work.                        │
+     │                                                              │
+     │  • .png or .webp also work — just match the name + extension │
+     │    in the src below (names are case-sensitive on GitHub).    │
+     │  • To change the TEXT, edit the title / paragraph / tags /   │
+     │    links inside each block — every editable spot is marked.  │
+     │  • Want a VIDEO instead of one image? A ready-made video      │
+     │    block is at the very bottom of this section — just         │
+     │    uncomment it and drop in your YouTube ID.                 │
+     └─────────────────────────────────────────────────────────────┘
 ============================================================= -->
 <section class="section" id="work">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Selected work · index 01–04</span>
+      <span class="eyebrow">Selected work · index 01–05</span>
       <h2>Things I have built and shipped.</h2>
     </div>
 
-    <!-- ---------- PROJECT 01 (VIDEO example) ---------- -->
+    <!-- ============= PROJECT 01 ============= -->
     <article class="project reveal">
       <div class="p-media">
-        <span class="media-tag">▶ DEMO</span>
-        <!-- VIDEO EMBED: replace the YouTube ID (VIDEO_ID) with your own.
-             From a YouTube link like youtube.com/watch?v=ABC123 the ID is ABC123 -->
-        <div class="media-frame video">
-          <iframe src=""
-                  title="Project demo video" loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
+        <span class="media-tag">◳ IMG</span>
+        <div class="media-frame">
+          <!-- IMAGE: drop  images/project-01.jpg  in your folder and it shows here -->
+          <img src="images/project-01.jpg" alt="Autonomous indoor navigation"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <span class="placeholder" style="display:none;">[ ADD IMAGE → images/project-01.jpg ]</span>
         </div>
       </div>
       <div class="p-body">
         <span class="p-index">// 01</span>
+        <!-- EDIT: title -->
         <h3>Autonomous Indoor Navigation Stack</h3>
+        <!-- EDIT: description -->
         <p>A full perception-to-control pipeline for a differential-drive robot: real-time SLAM with LiDAR–IMU–odometry fusion, costmap path planning, and recovery behaviors. Cut localization drift by 38% over 200 m runs.</p>
+        <!-- EDIT: tech tags (add/remove <span> items freely) -->
         <div class="stack">
           <span>ROS 2</span><span>C++</span><span>Nav2</span><span>EKF</span><span>LiDAR</span><span>Python</span>
         </div>
+        <!-- EDIT: links (change href="#" to a real URL, or delete a link) -->
         <div class="p-links">
           <a href="#">GitHub</a>
           <a href="#">Write-up</a>
@@ -414,15 +438,14 @@
       </div>
     </article>
 
-    <!-- ---------- PROJECT 02 (PHOTO example) ---------- -->
+    <!-- ============= PROJECT 02 ============= -->
     <article class="project reveal">
       <div class="p-media">
         <span class="media-tag">◳ IMG</span>
-        <!-- PHOTO: replace src with your image path, e.g. images/grasping.jpg
-             (create an "images" folder in your repo and upload photos there) -->
         <div class="media-frame">
-          <!-- <img src="images/grasping.jpg" alt="Robotic grasping rig" /> -->
-          <span class="placeholder">[ DROP IMAGE → images/grasping.jpg ]</span>
+          <img src="images/project-02.jpg" alt="Vision-based robotic grasping"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <span class="placeholder" style="display:none;">[ ADD IMAGE → images/project-02.jpg ]</span>
         </div>
       </div>
       <div class="p-body">
@@ -439,13 +462,14 @@
       </div>
     </article>
 
-    <!-- ---------- PROJECT 03 (PHOTO example) ---------- -->
+    <!-- ============= PROJECT 03 ============= -->
     <article class="project reveal">
       <div class="p-media">
         <span class="media-tag">◳ IMG</span>
         <div class="media-frame">
-          <!-- <img src="images/edge-detection.jpg" alt="Edge detection on Jetson" /> -->
-          <span class="placeholder">[ DROP IMAGE → images/edge.jpg ]</span>
+          <img src="images/project-03.jpg" alt="Real-time detection on edge hardware"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <span class="placeholder" style="display:none;">[ ADD IMAGE → images/project-03.jpg ]</span>
         </div>
       </div>
       <div class="p-body">
@@ -462,15 +486,14 @@
       </div>
     </article>
 
-    <!-- ---------- PROJECT 04 (VIDEO example) ---------- -->
+    <!-- ============= PROJECT 04 ============= -->
     <article class="project reveal">
       <div class="p-media">
-        <span class="media-tag">▶ DEMO</span>
-        <div class="media-frame video">
-          <iframe src="https://youtu.be/Q_ywmVsJJEY?si=MEtylESEKenOWzpl"
-                  title="Quadruped gait demo" loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
+        <span class="media-tag">◳ IMG</span>
+        <div class="media-frame">
+          <img src="images/project-04.jpg" alt="Learned quadruped gait controller"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <span class="placeholder" style="display:none;">[ ADD IMAGE → images/project-04.jpg ]</span>
         </div>
       </div>
       <div class="p-body">
@@ -486,6 +509,64 @@
         </div>
       </div>
     </article>
+
+    <!-- ============= PROJECT 05 ============= -->
+    <article class="project reveal">
+      <div class="p-media">
+        <span class="media-tag">◳ IMG</span>
+        <div class="media-frame">
+          <img src="images/project-05.jpg" alt="Visual-inertial odometry on a drone"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <span class="placeholder" style="display:none;">[ ADD IMAGE → images/project-05.jpg ]</span>
+        </div>
+      </div>
+      <div class="p-body">
+        <span class="p-index">// 05</span>
+        <h3>Visual-Inertial Odometry for Aerial Robots</h3>
+        <p>Estimated 6-DOF pose from a single camera and IMU on a compute-constrained drone, with loop closure for drift correction. Held sub-2% trajectory error on indoor flights with no external positioning.</p>
+        <div class="stack">
+          <span>VINS</span><span>ROS 2</span><span>IMU</span><span>OpenCV</span><span>C++</span>
+        </div>
+        <div class="p-links">
+          <a href="#">GitHub</a>
+          <a href="#">Write-up</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============= OPTIONAL: VIDEO PROJECT =============
+         Want one of your slots to be a video instead of an image?
+         Delete <!~~ and ~~> around the block below to turn it on.
+         Then replace VIDEO_ID with the ID from your YouTube link:
+           youtube.com/watch?v=ABC123   →  the ID is  ABC123
+           youtu.be/ABC123              →  the ID is  ABC123
+         (use only the ID, nothing after a "?")
+
+    <article class="project reveal">
+      <div class="p-media">
+        <span class="media-tag">▶ DEMO</span>
+        <div class="media-frame video">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+                  title="Project demo video" loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="p-body">
+        <span class="p-index">// 06</span>
+        <h3>Your Video Project Title</h3>
+        <p>Short description of what this demo shows and what you built.</p>
+        <div class="stack">
+          <span>Tag</span><span>Tag</span><span>Tag</span>
+        </div>
+        <div class="p-links">
+          <a href="#">GitHub</a>
+          <a href="#">Demo</a>
+        </div>
+      </div>
+    </article>
+
+    ============= END OPTIONAL VIDEO ============= -->
 
   </div>
 </section>
@@ -538,9 +619,10 @@
 <section class="section" id="about">
   <div class="wrap about">
     <div class="about-photo reveal">
-      <!-- PHOTO: replace src with your headshot, e.g. images/me.jpg -->
-      <!-- <img src="images/me.jpg" alt="Portrait" /> -->
-      <span class="placeholder">[ DROP PHOTO → images/me.jpg ]</span>
+      <!-- PHOTO: drop  images/me.jpg  in your folder and it shows here -->
+      <img src="images/me.jpg" alt="Portrait"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+      <span class="placeholder" style="display:none;">[ ADD PHOTO → images/me.jpg ]</span>
     </div>
     <div class="about-body reveal">
       <span class="eyebrow">About</span>
@@ -573,7 +655,7 @@
 
 <footer>
   <div class="wrap foot">
-    <span>© 2026 ADESH DHAGE </span>
+    <span>© 2026 ADESH DHAGE</span>
     <span>BUILT WITH HTML · HOSTED ON GITHUB PAGES</span>
     <span>18.5204°N 73.8567°E</span>
   </div>
